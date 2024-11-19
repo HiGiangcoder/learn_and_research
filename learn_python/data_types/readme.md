@@ -19,7 +19,7 @@ Viettel
 
 **Hung:**
 
-ViettelΓÇÖs basic plan costs 120,000 VND per month.
+Viettel's basic plan costs 120,000 VND per month.
 They offer discounts if we sign a longer contract.
 However, their prices might change in the future, which could make budgeting harder.
 Conclusion: VNPT has more stable and cheaper prices over time, which is better for saving money.
