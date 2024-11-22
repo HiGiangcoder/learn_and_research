@@ -1,9 +1,9 @@
 # Learning basic data preprocessing
 ## Mục lục
 
-[Overview of DataCleaning](#1.-overview-of-data-cleaning)
+[Overview of DataCleaning](#1-overview-of-data-cleaning)
 
-[One Hot Encoding](#2.-one-hot-encoding)
+[One Hot Encoding](#2-one-hot-encoding)
 
 
 ---
