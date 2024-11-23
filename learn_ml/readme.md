@@ -1,16 +1,17 @@
-# Learning basic data preprocessing
+<h1>Learning basic data preprocessing<h1>
 
 ## Mục lục
-
-[1. Overview of DataCleaning](#1-overview-of-data-cleaning)
-
-[2. One Hot Encoding](#2-one-hot-encoding)
-
-[3. Feature engineering: Scaling, Normalization and Standardization](#3-feature-engineering-scaling-normalization-and-standardization)
-
+<!-- TOC -->
+- [Mục lục](#mục-lục)
+- [1. Overview of Data Cleaning](#1-overview-of-data-cleaning)
+- [2. One Hot Encoding](#2-one-hot-encoding)
+- [3. Feature Engineering: Scaling, Normalization and Standardization](#3-feature-engineering-scaling-normalization-and-standardization)
+  - [3.1 Feature Scaling](#31-feature-scaling)
+  - [3.2 Normalization(chuẩn hóa)](#32-normalizationchuẩn-hóa)
+  - [3.3 Standardization(tiêu chuẩn hóa)](#33-standardizationtiêu-chuẩn-hóa)
 ---
 
-## 1 Overview of Data Cleaning
+## 1. Overview of Data Cleaning
 
 ```python
 import pandas as pd
@@ -80,7 +81,7 @@ df3 = df2.fillna(df2.Age.mean())
 df3.isnull().sum()
 ```
 
-## 2 One Hot Encoding
+## 2. One Hot Encoding
 
 - ***One hot encoding*** là hành động chia 1 features thuộc dạng categorical(phân loại)
   thành nhiều (ở đây là `số loại - 1`) features dạng numberical(loại số).
@@ -127,4 +128,47 @@ One-Hot Encoded Data using Pandas:
 4           30     False          False          True
 ```
 
-## 3 Feature Engineering: Scaling, Normalization and Standardization
+## 3. Feature Engineering: Scaling, Normalization and Standardization
+- Khi xử lý dữ liệu trước khi train data, cần phải chuẩn hóa, ... giúp cho train nhanh, chuẩn hơn.
+
+
+```python
+import pandas as pd
+df = pd.read_csv('SampleFile.csv')
+print(df.head())
+```
+
+```
+   LotArea  MSSubClass
+0     8450          60
+1     9600          20
+2    11250          60
+3     9550          70
+4    14260          60
+```
+### 3.1 Feature Scaling
+1. Absolute Maximum Scaling
+```python 
+max_vals = np.max(np.abs(df))
+print((df - max_vals) / max_vals)
+```
+- Công thức cụ thể: $X_{scaled} = \frac{X_i - max(|X_i|)}{max(|X_i|)}$
+- Với cách trên, data sẽ nằm trong đoạn [-1, 1] nhưng tôi không thích cách này lắm, đơn giản vì nó không được tốt cho một số data có đoạn [min-max] có mid lệch ra xa khỏi điểm số 0.
+
+2. Min-Max Scaling
+```python
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+scaled_data = scaler.fit_transform(df)
+scaled_df = pd.DataFrame(scaled_data, 
+						columns=df.columns)
+scaled_df.head()
+```
+- công thức cụ thể: $X_{scaled} = \frac{X_i - X_{min}}{X_{max}-X_{min}}$
+- Đây là cách tốt hơn, nó sẽ đưa giá trị về trong đoạn [0-1]
+- Thay vì tính theo công thức, ta dùng hàm MinMaxScaler từ thư viện sklearn 
+
+### 3.2 Normalization(chuẩn hóa)
+
+### 3.3 Standardization(tiêu chuẩn hóa)

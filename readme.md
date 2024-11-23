@@ -2,11 +2,11 @@
 - Here is a ***everything*** I am learning.
 ## [Learn python](learn_python/readme.md)
 
-## Learn oop
+## Learning oop
 
-## [Learn Data preprocessing](learn_ml/readme.md)
+## [Learning Data preprocessing](learn_ml/readme.md)
 
-## learn librarys basic
+## learning librarys basic
 
 ###  numpy
 
@@ -16,7 +16,7 @@
 
 ### seaborn
 
-## learn librarys advance
+## learning librarys advance
 
 ### sklearn
 
