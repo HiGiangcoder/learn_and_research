@@ -9,6 +9,7 @@
   - [3.1 Feature Scaling](#31-feature-scaling)
   - [3.2 Normalization(chuẩn hóa)](#32-normalizationchuẩn-hóa)
   - [3.3 Standardization(tiêu chuẩn hóa)](#33-standardizationtiêu-chuẩn-hóa)
+<!-- /TOC -->
 ---
 
 ## 1. Overview of Data Cleaning
@@ -129,7 +130,9 @@ One-Hot Encoded Data using Pandas:
 ```
 
 ## 3. Feature Engineering: Scaling, Normalization and Standardization
-- Khi xử lý dữ liệu trước khi train data, cần phải chuẩn hóa, ... giúp cho train nhanh, chuẩn hơn.
+- Khi xử lý dữ liệu trước khi train data, cần phải chuẩn hóa.
+- Nói cho đơn giản thì đưa giá trị về [-1, 1] tránh tràn số,...
+- Giúp cho train nhanh, chuẩn hơn.
 
 
 ```python
@@ -161,8 +164,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 scaler = MinMaxScaler()
 scaled_data = scaler.fit_transform(df)
-scaled_df = pd.DataFrame(scaled_data, 
-						columns=df.columns)
+scaled_df = pd.DataFrame(scaled_data, columns=df.columns)
 scaled_df.head()
 ```
 - công thức cụ thể: $X_{scaled} = \frac{X_i - X_{min}}{X_{max}-X_{min}}$
@@ -170,5 +172,30 @@ scaled_df.head()
 - Thay vì tính theo công thức, ta dùng hàm MinMaxScaler từ thư viện sklearn 
 
 ### 3.2 Normalization(chuẩn hóa)
+```python
+from sklearn.preprocessing import Normalizer
+
+scaler = Normalizer()
+scaled_data = scaler.fit_transform(df)
+scaled_df = pd.DataFrame(scaled_data,
+						columns=df.columns)
+print(scaled_df.head())
+```
+
+- Formula: $X_{scaled} = \frac{X_i - X_{mean}}{X_{max} - X_{min}}$
+- Có gia' tri. tu` [-1, 1]
 
 ### 3.3 Standardization(tiêu chuẩn hóa)
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+scaled_data = scaler.fit_transform(df)
+scaled_df = pd.DataFrame(scaled_data,
+						columns=df.columns)
+print(scaled_df.head())
+```
+
+- Formula: $X_{scaled} = \frac{X_i - X_{mean}}{\sigma}$
+- with $\sigma$ as the standard deviation(do lech chuan). 
