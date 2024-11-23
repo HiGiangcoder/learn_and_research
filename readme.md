@@ -1,6 +1,11 @@
 # Wellcome to my repository
 - here is a learn git and github
-- learn python, oop, ...
+## [Learn python](learn_python/readme.md)
+
+## Learn oop
+
+## [Learn Data preprocessing](learn_ml/readme.md)
+
 - learn librarys basic
     + numpy
     + pandas

@@ -1,14 +1,17 @@
 # Learning basic data preprocessing
+
 ## Mục lục
 
-[Overview of DataCleaning](#1-overview-of-data-cleaning)
+[1. Overview of DataCleaning](#1-overview-of-data-cleaning)
 
-[One Hot Encoding](#2-one-hot-encoding)
+[2. One Hot Encoding](#2-one-hot-encoding)
 
+[3. Feature engineering: Scaling, Normalization and Standardization](3-feature-engineering-scaling-normalization-and-standardization)
 
 ---
 
-## 1. Overview of Data Cleaning
+## 1 Overview of Data Cleaning
+
 ```python
 import pandas as pd
 import numpy as np
@@ -19,6 +22,7 @@ df.head()
 ```
 
 **Output**
+
 ```
 PassengerId    Survived    Pclass    Name    Sex    Age    SibSp    Parch    Ticket    Fare    Cabin    Embarked
 0    1    0    3    Braund, Mr. Owen Harris    male    22.0    1    0    A/5 21171    7.2500    NaN    S
@@ -44,25 +48,31 @@ print('Numerical columns :',num_col)
 ```
 
 - Drop Name and Ticket Columns
+
 ```python
 df1 = df.drop(columns=['Name','Ticket'])
 df1.shape
 ```
+
 **Output**
+
 ```
 (891, 10)
 ```
 
 - Cách xóa những hàng(data) tại cột 'Embarked' có chứa `Nan`
+
 ```python
 df2 = df1.drop(columns='Cabin')
 df2.dropna(subset=['Embarked'], axis=0, inplace=True)
 df2.shape
 ```
+
 > inplace: tại chỗ
 > tác dụng: thay đổi trên chính data frame đó
 
 - Cách không xóa giá trị `Nan` mà thay thế giá trị đó bằng trung bình cộng của feature đó
+
 ```python
 # Mean imputation
 df3 = df2.fillna(df2.Age.mean())
@@ -70,11 +80,13 @@ df3 = df2.fillna(df2.Age.mean())
 df3.isnull().sum()
 ```
 
-## 2. One Hot Encoding
-- ***One hot encoding*** là hành động chia 1 features thuộc dạng categorical(phân loại) 
-thành nhiều (ở đây là `số loại - 1`) features dạng numberical(loại số).
+## 2 One Hot Encoding
+
+- ***One hot encoding*** là hành động chia 1 features thuộc dạng categorical(phân loại)
+  thành nhiều (ở đây là `số loại - 1`) features dạng numberical(loại số).
 - **Lý do:** để tránh khi train model sẽ ra kết quả không chính xác.
 - Dưới đây là cách *one hot encoding* bằng **pandas**
+
 ```python
 import pandas as pd
 # from sklearn.preprocessing import OneHotEncoder
@@ -96,6 +108,7 @@ print(f"One-Hot Encoded Data using Pandas:\n{df_pandas_encoded}\n")
 ```
 
 **Output**
+
 ```
 Original Employee Data:
    Employee id Gender Remarks
@@ -114,3 +127,4 @@ One-Hot Encoded Data using Pandas:
 4           30     False          False          True
 ```
 
+## 3. Feature Engineering: Scaling, Normalization and Standardization
