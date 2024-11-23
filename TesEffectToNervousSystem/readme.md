@@ -32,7 +32,7 @@
 
 ---
 
-Nói ngắn gọn, testosterone không chỉ là hormone sinh dục mà còn đóng vai trò quan trọng trong việc bảo vệ và tối ưu hóa hoạt động của hệ thần kinh. 😊
+Nói ngắn gọn, testosterone không chỉ là hormone sinh dục mà còn đóng vai trò quan trọng trong việc bảo vệ và tối ưu hóa hoạt động của hệ thần kinh.
 
 
 ## Tóm tắt về hệ thần kinh (Tổng quan hơn).
@@ -115,5 +115,3 @@ Hệ thần kinh hoạt động thông qua sự tương tác giữa các tế b�
 - **Nghiên cứu tiềm năng**:
   - Tác động của testosterone trong điều trị bệnh thoái hóa thần kinh.
   - Vai trò của testosterone trong cải thiện nhận thức và sức khỏe tâm thần.
-
-Nếu bạn muốn tìm hiểu thêm hoặc cần minh làm rõ phần nào, cứ nói nhé! 😊 

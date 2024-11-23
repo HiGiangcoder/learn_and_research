@@ -1,5 +1,5 @@
 # Wellcome to my repository
-- here is a learn ***anything***
+- Here is a ***everything*** I am learning.
 ## [Learn python](learn_python/readme.md)
 
 ## Learn oop
@@ -26,5 +26,6 @@
 
 ### pytorch
 
+---
 ##  and other data...
 ### [Hoocmon testosterone effect to nervous system](TesEffectToNervousSystem/readme.md)
