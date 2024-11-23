@@ -6,7 +6,7 @@
 
 [2. One Hot Encoding](#2-one-hot-encoding)
 
-[3. Feature engineering: Scaling, Normalization and Standardization](3-feature-engineering-scaling-normalization-and-standardization)
+[3. Feature engineering: Scaling, Normalization and Standardization](#3-feature-engineering-scaling-normalization-and-standardization)
 
 ---
 
@@ -127,4 +127,4 @@ One-Hot Encoded Data using Pandas:
 4           30     False          False          True
 ```
 
-## 3. Feature Engineering: Scaling, Normalization and Standardization
+## 3 Feature Engineering: Scaling, Normalization and Standardization
