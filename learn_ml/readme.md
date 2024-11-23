@@ -1,14 +1,16 @@
 <h1>Learning basic data preprocessing<h1>
 
-## Mục lục
+<h2>Mục lục<h2>
+
 <!-- TOC -->
-- [Mục lục](#mục-lục)
 - [1. Overview of Data Cleaning](#1-overview-of-data-cleaning)
 - [2. One Hot Encoding](#2-one-hot-encoding)
 - [3. Feature Engineering: Scaling, Normalization and Standardization](#3-feature-engineering-scaling-normalization-and-standardization)
   - [3.1 Feature Scaling](#31-feature-scaling)
   - [3.2 Normalization(chuẩn hóa)](#32-normalizationchuẩn-hóa)
   - [3.3 Standardization(tiêu chuẩn hóa)](#33-standardizationtiêu-chuẩn-hóa)
+- [4. Label Encoding](#4-label-encoding)
+- [5. Woking with Missing Data in Pandas](#5-woking-with-missing-data-in-pandas)
 <!-- /TOC -->
 ---
 
@@ -197,3 +199,56 @@ print(scaled_df.head())
 
 - Formula: $X_{scaled} = \frac{X_i - X_{mean}}{\sigma}$
 - with $\sigma$ as the standard deviation(do lech chuan). 
+
+## 4. Label Encoding
+
+- In machine learning projects, we usually deal with datasets having different categorical columns where some columns have their elements in the ordinal variable category for e.g a column income level having elements as low, medium, or high in this case we can replace these elements with 1,2,3. where 1 represents `low`  2  `medium`  and 3` high`. Through this type of encoding, we try to preserve the meaning of the element where higher weights are assigned to the elements having higher priority.
+
+- Label Encoding is a technique that is used to convert categorical columns into numerical ones so that they can be fitted by machine learning models which only take numerical data. It is an important pre-processing step in a machine-learning project.
+
+- Suppose we have a column Height in some dataset that has elements as Tall, Medium, and short. To convert this categorical column into a numerical column we will apply label encoding to this column. After applying label encoding, the Height column is converted into a numerical column having elements 0,1, and 2 where 0 is the label for tall, 1 is the label for medium, and 2 is the label for short height.
+
+| Height | Height |
+| ------ | ------ |
+| Tail | 0 |
+| Medium | 1 |
+| Short | 2 |
+
+```python
+# Import libraries  
+import numpy as np 
+import pandas as pd 
+  
+# Import dataset 
+df = pd.read_csv('../../data/Iris.csv') 
+  
+df['species'].unique() 
+```
+
+**Output**
+```
+array(['Iris-setosa', 'Iris-versicolor', 'Iris-virginica'], dtype=object)
+```
+
+- After applying Label Encoding with LabelEncoder() our categorical value will replace with the numerical value[int].
+
+```python
+# Import label encoder 
+from sklearn import preprocessing 
+
+# label_encoder object knows 
+# how to understand word labels. 
+label_encoder = preprocessing.LabelEncoder() 
+
+# Encode labels in column 'species'. 
+df['species']= label_encoder.fit_transform(df['species']) 
+
+df['species'].unique() 
+```
+
+**Output**
+```
+array([0, 1, 2], dtype=int64)
+```
+
+## 5. Woking with Missing Data in Pandas
