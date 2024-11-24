@@ -18,7 +18,7 @@
 
 ## learning librarys advance
 
-### sklearn
+### [Sklearn: learning basic machine learning](learn_sklearn/readme.md)
 
 ### keras
 
