@@ -10,7 +10,8 @@
   - [3.2 Normalization(chuẩn hóa)](#32-normalizationchuẩn-hóa)
   - [3.3 Standardization(tiêu chuẩn hóa)](#33-standardizationtiêu-chuẩn-hóa)
 - [4. Label Encoding](#4-label-encoding)
-- [5. Woking with Missing Data in Pandas](#5-woking-with-missing-data-in-pandas)
+- [5. Woking with Missing Data in Pandas:](#5-woking-with-missing-data-in-pandas)
+- [6. Imputing Missing Data with Simple and Advanced Techniques](#6-imputing-missing-data-with-simple-and-advanced-techniques)
 <!-- /TOC -->
 ---
 
@@ -251,4 +252,207 @@ df['species'].unique()
 array([0, 1, 2], dtype=int64)
 ```
 
-## 5. Woking with Missing Data in Pandas
+## 5. Woking with Missing Data in Pandas:
+
+
+In pandas missing data is represented by two value:
+
+- `None`: none is a Python singleton(đơn đoc) object that is often used for missing data in Python code.
+- `NaN`: NaN(an acronym(tu viet tat) for Not a Number), is a special floating-point value recognized(duo.c cong nha.n) by all systems that uuse the standard IEEE floating-point represention.
+
+```python
+isnull()
+
+notnull()
+
+dropna()
+
+fillna()
+
+replace()
+
+interpolate()
+```
+
+1. Checking missing data using `isnull()` and `notnull()`
+```python
+import pandas as pd 
+data = pd.read_csv(&quot;employees.csv&quot;) 
+  
+# creating bool series True for NaN values 
+bool_series = pd.isnull(data[&quot;Gender&quot;]) 
+  
+# filtering data 
+# displaying data only with Gender = NaN 
+data[bool_series]
+```
+
+- **Output:** As shown in the output image, only the rows having Gender = NULL are displayed.
+
+2. Filling missing values using `fullna()`, `replace()` and `interpolate()`
+2.1 Filling a null value using `fullna()`:
+2.1.1. Filling null values with a single value
+```python
+import pandas as pd
+import numpy as np
+
+# dictionary of lists
+dict = {'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, 45, 56, np.nan],
+        'Third Score':[np.nan, 40, 80, 98]}
+
+# creating a dataframe from dictionary
+df = pd.DataFrame(dict)
+
+# filling missing value using fillna()  
+df.fillna(0)
+```
+
+**Output:**
+|     | First Score | Second Score | Third Score |
+| --- | ---         | ---          | ---         |
+| 0   | 100.0       | 30.0         | 0.0         |
+| 1   | 90.0        | 45.0         | 40.0        |
+| 2   | 0.0         | 56.0         | 80.0        |
+| 3   | 95.0        | 0.0          | 98.0        |
+
+
+2.1.2. filling a missing value with previous ones  
+```python
+df.fillna(method ='pad')
+```
+
+2.1.3. filling  null value with the next ones
+```python
+df.fillna(method ='bfill')
+```
+
+2.2. Filling a null values using `replace()` method
+```python
+data = pd.read_csv(&quot;employees.csv&quot;) 
+
+# will replace  Nan value in dataframe with value -99  
+data.replace(to_replace = np.nan, value = -99)
+```
+
+2.3 With `interpolate()` method
+interpolate(Xen va`o): trung binh cong cua 2 so ben canh
+```python
+# to interpolate the missing values 
+df.interpolate(method ='linear', limit_direction ='forward')
+```
+
+3. Dropping missing values using `dropna()`
+```python
+# importing pandas as pd
+import pandas as pd
+
+# importing numpy as np
+import numpy as np
+
+# dictionary of lists
+dict = {'First Score':[100, 90, np.nan, 95],
+        'Second Score': [30, np.nan, 45, 56],
+        'Third Score':[52, 40, 80, 98],
+        'Fourth Score':[np.nan, np.nan, np.nan, 65]}
+
+# creating a dataframe from dictionary
+df = pd.DataFrame(dict)
+
+# using dropna() function  
+df.dropna()
+```
+**Output:**
+|     | First Score | Second Score | Third Score | Fourth Score |
+| --- | ---         |        ---   |      ---    | ---          |
+| 3   |   95.0      |      56.0    |    98       |      65.0    |
+
+- Drop a columns
+```python
+# using dropna() function     
+df.dropna(axis = 1)
+```
+
+## 6. Imputing Missing Data with Simple and Advanced Techniques
+```python
+df.dropna(axis=0, how='any', subset=None, inplace=False)
+```
+
+Đoạn code `df.dropna(axis=0, how='any', subset=None, inplace=False)` là một câu lệnh trong thư viện pandas của Python, dùng để loại bỏ các hàng hoặc cột trong một DataFrame chứa giá trị bị thiếu (NaN). Cụ thể:
+
+- **`axis=0`**: Quy định hướng thực hiện thao tác. 
+  - `axis=0`: Áp dụng trên các hàng.
+  - `axis=1`: Áp dụng trên các cột.
+  
+
+- **`how='any'`**: Xác định điều kiện để loại bỏ.
+  - `'any'`: Loại bỏ hàng nếu có **bất kỳ** giá trị nào trong hàng là NaN.
+  - `'all'`: Loại bỏ hàng chỉ khi **tất cả** các giá trị trong hàng đều là NaN.
+  
+
+- **`subset=None`**: Xác định các cột cần kiểm tra.
+  - Nếu `subset` được cung cấp (ví dụ: `['column1', 'column2']`), chỉ kiểm tra giá trị NaN trong các cột được chỉ định.
+  - Nếu `subset=None`, kiểm tra toàn bộ các cột.
+
+
+- **`inplace=False`**: Quy định cách thực hiện thay đổi.
+  - Nếu `inplace=True`, DataFrame gốc (`df`) sẽ được thay đổi trực tiếp.
+  - Nếu `inplace=False`, phương thức trả về một bản sao của DataFrame sau khi đã loại bỏ các hàng/cột.
+
+1. Basic Imputation Techniques
+
+   1.1 Mean and Mode Imputation
+
+   We can use SimpleImputer function from scikit-learn to replace missing values with a fill value. SimpleImputer function has a parameter called strategy that gives us four possibilities(kha nang) to choose the imputation method:
+
+   - `strategy='mean'` replaces missing values using the mean of the column.
+   - `strategy='median'` replaces missing values using the median of the column.
+   - `strategy='most_frequent'` replaces missing values using the most frequent(thuo`ng xuyen) (or mode) of the column.
+   - `strategy='constant'` replaces missing values using a defined fill value.
+
+```python
+# Mean Imputation
+
+df_mean = df.copy()
+mean_imputer = SimpleImputer(strategy='mean')
+df_mean['MaxSpeed'] = mean_imputer.fit_transform(df_mean['MaxSpeed'].values.reshape(-1,1))
+```
+
+   Let’s plot a scatter plot with AvgSpeed on the x-axis and MaxSpeed on the y-axis. As we know AvgSpeed column doesn’t have missing values, and we replaced missing values in the MaxSpeed column with column mean. In the plot below, green points are transformed data and blue points are original non-missing data.
+
+```python
+# Scatter plot
+
+fig = plt.Figure()
+null_values = df['MaxSpeed'].isnull()
+fig = df_mean.plot(x="AvgSpeed", y='MaxSpeed', kind='scatter', c=null_values, cmap='winter', title='Mean Imputation', colorbar=False)
+
+```
+
+   1.2. Time Series Imputation
+
+```python
+df['MaxSpeed'][:100].plot(title="MaxSpeed", marker="o")
+```
+
+   - While loading the dataset, we defined the index with the combination of Date and StartTime columns, if that is not clear, see the Data part above.☝️
+
+   - One way to impute missing values in a time series data is to fill them with either the last or the next observed values. Pandas have fillna() function which has method parameter where we can choose “ffill” to fill with the next observed value or “bfill” to fill with the previously observed value.
+
+```python
+# Ffill imputation
+ffill_imputation = df.fillna(method='ffill')
+
+# Plot imputed data
+ffill_imp['MaxSpeed'][:100].plot(color='red', marker='o', linestyle='dotted')
+df['MaxSpeed'][:100].plot(title='MaxSpeed', marker='o')
+```
+   
+![missing values filled with next observed value](/image.png)
+
+
+2. Advanced Techniques
+
+   2.1. K-Nearest Neighbour (KNN) Imputation
+
+   2.2. Multivariate Imputation by Chained Equation — MICE
