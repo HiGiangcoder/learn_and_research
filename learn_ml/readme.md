@@ -448,7 +448,7 @@ ffill_imp['MaxSpeed'][:100].plot(color='red', marker='o', linestyle='dotted')
 df['MaxSpeed'][:100].plot(title='MaxSpeed', marker='o')
 ```
    
-![missing values filled with next observed value](/image.png)
+![missing values filled with next observed value](/learn_ml/image.png)
 
 
 2. Advanced Techniques
