@@ -4,7 +4,7 @@
 
 ## Learning oop
 
-## [Learning Data preprocessing](learn_ml/readme.md)
+## [Learning Data preprocessing](/learn_preproccessing/readme.md)
 
 ## learning librarys basic
 
@@ -25,6 +25,12 @@
 ### tensorflow
 
 ### pytorch
+
+## Exercise
+
+### Kaggle
+
+#### [Data Cleaning](/exercise_kaggle/data_cleaning/readme.md)
 
 ---
 ##  and other data...

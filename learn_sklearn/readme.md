@@ -10,6 +10,12 @@
     - [More about Linear regression](#more-about-linear-regression)
 - [3. Logistic Regression](#3-logistic-regression)
 - [4. K-Nearest Neighbor](#4-k-nearest-neighbor)
+  - [Thuật toán k-NN dựa trên nguyên tắc:](#thuật-toán-k-nn-dựa-trên-nguyên-tắc)
+      - [Step 1: Importing the required Libraries](#step-1-importing-the-required-libraries)
+      - [Step 2: Reading the Dataset](#step-2-reading-the-dataset)
+      - [Step 3: Training the model](#step-3-training-the-model)
+      - [Step 4: Evaluating the model](#step-4-evaluating-the-model)
+      - [Step 5: Plotting the training and test scores graph](#step-5-plotting-the-training-and-test-scores-graph)
 - [5. Decision Tree](#5-decision-tree)
 - [6. Common metrics for classification models (e.g., confusion matrix, accuracy, precision, recall, f1-score)](#6-common-metrics-for-classification-models-eg-confusion-matrix-accuracy-precision-recall-f1-score)
 - [7. Try different the model's hyperparameters to improve performance](#7-try-different-the-models-hyperparameters-to-improve-performance)
@@ -253,9 +259,124 @@ plt.show()
 
 ## 4. K-Nearest Neighbor
 - [link](https://www.geeksforgeeks.org/ml-implementation-of-knn-classifier-using-sklearn/)
+1. Ý tưởng cơ bản
+### Thuật toán k-NN dựa trên nguyên tắc:
+
+- Đối với một điểm dữ liệu mới cần dự đoán (gọi là điểm kiểm tra), thuật toán sẽ tìm k điểm dữ liệu gần nhất trong tập huấn luyện (neighbors).
+
+- Kết quả dự đoán sẽ dựa vào nhãn hoặc giá trị của các điểm gần nhất này:
+
+- **Phân loại:** Điểm kiểm tra được gán nhãn dựa trên đa số phiếu của k hàng xóm gần nhất (majority voting).
+
+- **Hồi quy:** Điểm kiểm tra được dự đoán là trung bình (hoặc giá trị trung tâm khác) của k hàng xóm gần nhất.
+
+##### Step 1: Importing the required Libraries
+```python
+import numpy as np 
+import pandas as pd 
+from sklearn.model_selection import train_test_split 
+from sklearn.neighbors import KNeighborsClassifier 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+```
+
+##### Step 2: Reading the Dataset
+```python
+cd C:\Users\Dev\Desktop\Kaggle\Breast_Cancer 
+# Changing the read file location to the location of the file 
+
+df = pd.read_csv('data.csv') 
+
+y = df['diagnosis'] 
+X = df.drop('diagnosis', axis = 1) 
+X = X.drop('Unnamed: 32', axis = 1) 
+X = X.drop('id', axis = 1) 
+# Separating the dependent and independent variable 
+
+X_train, X_test, y_train, y_test = train_test_split( 
+			X, y, test_size = 0.3, random_state = 0) 
+# Splitting the data into training and testing data 
+```
+
+##### Step 3: Training the model
+```python
+K = [] 
+training = [] 
+test = [] 
+scores = {} 
+
+for k in range(2, 21): 
+	clf = KNeighborsClassifier(n_neighbors = k) 
+	clf.fit(X_train, y_train) 
+
+	training_score = clf.score(X_train, y_train) 
+	test_score = clf.score(X_test, y_test) 
+	K.append(k) 
+
+	training.append(training_score) 
+	test.append(test_score) 
+	scores[k] = [training_score, test_score] 
+```
+
+##### Step 4: Evaluating the model
+```python
+for keys, values in scores.items():
+   print(keys, ':', values)
+```
+
+![print evaluting](/learn_sklearn/image4.png)
+
+##### Step 5: Plotting the training and test scores graph
+```python
+ax = sns.stripplot(K, training)
+ax.set(xlablel = 'value of k', ylabel = 'training score')
+plt.show()
+```
+![print evaluting training](/learn_sklearn/image5.png)
+
+```python
+plt.scatter(K, training, color ='k') 
+plt.scatter(K, test, color ='g') 
+plt.show() 
+# For overlapping scatter plots 
+```
+![show ealuting training and test](/learn_sklearn/image6.png)
 
 ## 5. Decision Tree
 - [link](https://www.tutorialspoint.com/scikit_learn/scikit_learn_decision_trees.htm)
+
+```python
+from sklearn import tree
+from sklearn.model_selection import train_test_split
+X = [[165,19],[175,32],[136,35],[174,65],[141,28],[176,15],[131,32],[166,6],[128,32],[179,10],[136,34],[186,2],[126,25],[176,28],[112,38],[169,9],[171,36],[116,25],[196,25], [196,38], [126,40], [197,20], [150,25], [140,32],[136,35]]
+
+Y = ['Man', 'Woman', 'Woman', 'Man', 'Woman', 'Man', 'Woman', 'Man', 'Woman', 'Man', 'Woman', 'Man', 'Woman', 'Woman', 'Woman','Man', 'Woman', 'Woman', 'Man', 'Woman', 'Woman', 'Man', 'Man', 'Woman', 'Woman']
+
+data_feature_names = ['height', 'length of hair']
+
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 1)
+
+DTclf = tree.DecisionTreeClassifier()
+DTclf = clf.fit(X,Y)
+
+prediction = DTclf.predict([[135,29]])
+print(prediction)
+```
+**Output**
+```
+['Woman']
+```
+
+**Example**
+```python
+prediction = DTclf.predict_proba([[135,29]])
+print(prediction)
+```
+
+**Output**
+```
+[[0. 1.]]
+```
 
 ## 6. Common metrics for classification models (e.g., confusion matrix, accuracy, precision, recall, f1-score)
 - [link](https://towardsdatascience.com/20-popular-machine-learning-metrics-part-1-classification-regression-evaluation-metrics-1ca3e282a2ce)
