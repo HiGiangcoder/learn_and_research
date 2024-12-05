@@ -1,5 +1,7 @@
 # Wellcome to my repository
+
 - Here is a ***everything*** I am learning.
+
 ## [Learn python](learn_python/readme.md)
 
 ## Learning oop
@@ -8,7 +10,7 @@
 
 ## learning librarys basic
 
-###  numpy
+### numpy
 
 ### pandas
 
@@ -22,7 +24,7 @@
 
 ### keras
 
-### tensorflow
+### [tensorflow](/tensorflow/readme.md)
 
 ### pytorch
 
@@ -33,5 +35,7 @@
 #### [Data Cleaning](/exercise_kaggle/data_cleaning/readme.md)
 
 ---
-##  and other data...
+
+## and other data...
+
 ### [Hoocmon testosterone effect to nervous system](TesEffectToNervousSystem/readme.md)
