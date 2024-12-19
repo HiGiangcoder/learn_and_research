@@ -1,6 +1,6 @@
 # Wellcome to my repository
 
-- Here is a ***everything*** I am learning.
+- Here is a ***everything*** I am learning...
 
 ## [Learn python](learn_python/readme.md)
 
